@@ -61,7 +61,7 @@ class ExportTra(object):
     _current_date = time.strftime('%d%m%Y%H%M')
     _zone_fixe = '***'
 
-    _available_version = ['007']
+    _available_version = ['009', '007']
     _generate_date = ''
 
     _debug_header = 0
