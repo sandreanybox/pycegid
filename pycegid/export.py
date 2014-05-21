@@ -116,9 +116,19 @@ class ExportTra(object):
                                                raison_sociale, reprise, num_dossier,
                                                frequence, date_purge, sous_version)
 
+    def addJAL(self, code='', libelle='', nature='', souche='', souche_sim='',
+               compte_contr='', axe='', mode_saisie=''):
+        self._content['lines'].append(''.join([
+            self._zone_fixe,                   # Prefix (***)
+            'JAL',                             # Identifiant
+            self._mandatory(code, 17),          # Code
+            self._format(libelle, 21),      # Libelle
+            self._format(nature, 28),           # Axe
+        ]))
+
     def addSAT(self, code='', libelle='', axe='', table1='', table2='',
-                     table3='', table4='', table5='', table6='', table7='',
-                     table8='', table9='', table10='', abrege='', sens='M'):
+               table3='', table4='', table5='', table6='', table7='',
+               table8='', table9='', table10='', abrege='', sens='M'):
         """
         See documentation version 7 page 23/60 which describe "Section Analytique"
         """
