@@ -22,6 +22,21 @@
 ##############################################################################
 
 import time
+import unicodedata
+
+
+def rmdiacritics(char):
+    '''
+    Return the base character of char, by "removing" any
+    diacritics like accents or curls and strokes and the like.
+    '''
+    if isinstance(char, str):
+        char = unicode(char)
+    desc = unicodedata.name(char)
+    cutoff = desc.find(' WITH ')
+    if cutoff != -1:
+        desc = desc[:cutoff]
+    return unicodedata.lookup(desc)
 
 
 class CegidException(Exception):
@@ -374,7 +389,8 @@ class ExportTra(object):
 
     @staticmethod
     def _format(value, length, rpad=False, caract=' '):
-        value = str(value).replace('\r', '').replace('\n', '')
+        clean_value = ''.join(rmdiacritics(ch) for ch in value)
+        value = str(clean_value).decode('ascii', 'ignore').replace('\r', '').replace('\n', '')
         if rpad:
             return value.rjust(length, caract)[:length]
         return value.ljust(length, caract)[:length]
