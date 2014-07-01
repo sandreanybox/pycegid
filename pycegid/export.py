@@ -130,7 +130,9 @@ class ExportTra(object):
                                                format_fic, code_ex_clos, date_bascule,
                                                date_arrete, num_dossier_cab, utilisateur,
                                                raison_sociale, reprise, num_dossier,
-                                               frequence, date_purge, sous_version)
+                                               frequence, date_purge, sous_version,
+                                               so_newanalytique, so_readyguid, dag_gestagricole,
+                                               so_noseqbldag)
 
     def addJAL(self, code='', libelle='', nature='', souche='', souche_sim='',
                compte_contr='', axe='', mode_saisie=''):
