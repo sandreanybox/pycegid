@@ -113,7 +113,8 @@ class ExportTra(object):
                         date_arrete=None, num_dossier_cab='', utilisateur=None,
                         raison_sociale='', reprise='', num_dossier='',
                         frequence='', date_purge=None, sous_version='001',
-                        so_newanalytique='', so_readyguid='-', dag_gestagricole='-', so_noseqbldag=''):
+                        so_newanalytique='', so_readyguid='-',
+                        dag_gestagricole='-', so_noseqbldag=''):
         if utilisateur is None:
             utilisateur = 'pycegid'
 
@@ -135,13 +136,30 @@ class ExportTra(object):
                                                so_noseqbldag)
 
     def addJAL(self, code='', libelle='', nature='', souche='', souche_sim='',
-               compte_contr='', axe='', mode_saisie=''):
+               compte_contr='', axe='', mode_saisie='-', cptauto='', cptint="",
+               abrege='', codeexpert='-', ferme='-', contrepartieau='', effet='-',
+               multi_devise='-', centralisable='-'):
+
         self._content['lines'].append(''.join([
             self._zone_fixe,                   # Prefix (***)
             'JAL',                             # Identifiant
-            self._mandatory(code, 17),          # Code
-            self._format(libelle, 21),      # Libelle
-            self._format(nature, 28),           # Axe
+            self._mandatory(code, 3),          # Code
+            self._format(libelle, 35),         # Libelle
+            self._format(nature, 3),           # Nature
+            self._format(souche, 3),           # souche ecriture
+            self._format(souche_sim, 3),       # souche ecriture simulation
+            self._format(compte_contr, 17),    # Compte de contrepartie
+            self._format(axe, 3),              # Axe analytique
+            self._format(mode_saisie, 3),      # Mode saisie
+            self._format(cptauto, 200),        # Comptes automatiques
+            self._format(cptint, 200),         # Comptes interdits
+            self._format(abrege, 17),          # Libellé abrégé du journal
+            self._format(codeexpert, 1),       # réservé à l’expert comptable
+            self._format(ferme, 1),            # Fermeture = X ou -
+            self._format(contrepartieau, 17),  # Non utilisé
+            self._format(effet, 1),            # Suivi d’effet = X ou -
+            self._format(multi_devise, 1),     # Multidevise = X ou -
+            self._format(centralisable, 1),    # Centralisable = X ou -
         ]))
 
     def addSAT(self, code='', libelle='', axe='', table1='', table2='',
