@@ -112,7 +112,8 @@ class ExportTra(object):
                         format_fic='ETE', code_ex_clos='', date_bascule=None,
                         date_arrete=None, num_dossier_cab='', utilisateur=None,
                         raison_sociale='', reprise='', num_dossier='',
-                        frequence='', date_purge=None, sous_version='001'):
+                        frequence='', date_purge=None, sous_version='001',
+                        so_newanalytique='', so_readyguid='-', dag_gestagricole='-', so_noseqbldag=''):
         if utilisateur is None:
             utilisateur = 'pycegid'
 
@@ -411,7 +412,8 @@ class ExportTra(object):
 
     def _header(self, identifiant, origine, type_fic, format_fic, code_ex_clos,
                       date_bascule, date_arrete, num_dossier_cab, utilisateur, raison_sociale,
-                      reprise, num_dossier, frequence, date_purge, sous_version):
+                      reprise, num_dossier, frequence, date_purge, sous_version, so_newanalytique,
+                      so_readyguid, dag_gestagricole, so_noseqbldag):
         """
         Generate the header of the file
         """
@@ -434,6 +436,10 @@ class ExportTra(object):
             self._format(frequence, 3),             # Frequence
             self._format(date_purge, 8),            # Date de purge des écritures
             self._format(sous_version, 3),          # Sous Version
+            self._format(so_newanalytique, 1),      # Non utilisé
+            self._format(so_readyguid, 1),          # Nouvelle gestion des transferts si
+                                                    # le fichier a des GUID =‘X’ ou pas ‘-‘
+            self._format(dag_gestagricole, 15),     # Dossier agricole =‘X’ ou pas ‘-‘
         ])
 
 
