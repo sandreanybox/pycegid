@@ -84,6 +84,6 @@ class TestExport1(object):
         assert position(content, 42, 8) == time.strftime('%d%m%Y')
         assert position(content, 128, 6) == 'B105ZZ'
         assert position(content, 145, 3) == '001'
-        assert len(content.replace('\r\n', '')) == 147, 'Record length not valid (%d)' % len(content)
+        assert len(content.replace('\r\n', '')) == 164, 'Record length not valid (%d)' % len(content)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
